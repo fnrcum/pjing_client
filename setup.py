@@ -1,17 +1,13 @@
-import sys
-from cx_Freeze import setup, Executable
+from distutils.core import setup
+import py2exe
 
-# Dependencies are automatically detected, but it might need fine tuning.
-build_exe_options = {"packages": ["os", 'pygame', 'pyautogui', 'pygbutton', 'pygame', 'sys', 'tkinter']}
+Mydata_files = [('images', ['icon.ico']), ('', ['freesansbold.ttf'])]
 
-# GUI applications require a different base on Windows (the default is for a
-# console application).
-base = None
-if sys.platform == "win32":
-    base = "Win32GUI"
-
-setup(  name = "pJing",
-        version = "0.1",
-        description = "Jing copy!",
-        options = {"build_exe": build_exe_options},
-        executables = [Executable("pJing.py", base=base)])
+setup(
+    windows=[{
+        "script": "pJing.py",
+        "icon_resources": [(0, "icon.ico")],
+        "dest_base": "pJing"
+    }],
+    data_files=Mydata_files
+)

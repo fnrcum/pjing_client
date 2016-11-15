@@ -1,37 +1,46 @@
 # encoding: cp1252
-import pygame, sys, os
-from PIL import Image
-import pygbutton
+import pygame, os
+from PIL import Image, ImageTk
 import pyautogui
-from tkinter import Tk, Label, Button, LEFT, RIGHT
+import tkFileDialog
+from Tkinter import Tk, Label, Button, LEFT
 
 
 class MyFirstGUI:
     def __init__(self, master):
         self.master = master
         master.title("pJing")
+        master.iconbitmap(r'icon.ico')
 
-        self.label = Label(master, text="This is our first GUI!")
-        self.label.pack()
+        pilImage = Image.open('out.png')
+        image = ImageTk.PhotoImage(pilImage)
+
+        label = Label(image=image)
+        label.image = image  # keep a reference!
+        label.pack()
 
         self.greet_button = Button(master, text="Upload", command=self.upload)
         self.greet_button.pack(side=LEFT)
 
-        self.greet_button = Button(master, text="Remove", command=self.remove)
+        self.greet_button = Button(master, text="Save", command=self.save)
         self.greet_button.pack(side=LEFT)
 
-        self.close_button = Button(master, text="Quit", command=master.quit)
-        self.close_button.pack(side=RIGHT)
+        self.close_button = Button(master, text="Quit", command=self.quit)
+        self.close_button.pack(side=LEFT)
 
     def upload(self):
         print("Not Supported yet!")
 
-    def remove(self):
+    def save(self):
+        path = tkFileDialog.asksaveasfilename(defaultextension=".png")
+        im.save(path)
         os.remove('out.png')
 
-pygame.init()
+    def quit(self):
+        os.remove('out.png')
+        self.master.quit()
 
-buttonObj = pygbutton.PygButton((50, 50, 60, 30), 'Button Caption')
+pygame.init()
 
 
 def displayImage(screen, px, topleft, prior):
@@ -71,6 +80,7 @@ def setup(path):
     rect = px.get_rect()
     wg = rect[2]
     hg = rect[3]
+    pygame.font.SysFont("Arial", 16)
     screen = pygame.display.set_mode([wg, hg], pygame.FULLSCREEN)
     screen.blit(px, px.get_rect())
     pygame.display.flip()
