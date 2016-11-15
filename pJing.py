@@ -1,8 +1,9 @@
 # encoding: cp1252
-import pygame, os
+import pygame, os, sys
 import pyautogui
 from image_handler import ImageHandler
-from Tkinter import Tk
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 from PIL import Image
 from options_gui import OptionsGUI
 
@@ -29,6 +30,8 @@ if __name__ == "__main__":
     os.remove(input_loc)
 
     # File options
-    root = Tk()
-    my_gui = OptionsGUI(root, im)
-    root.mainloop()
+    app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon('icon.ico'))
+    ex = OptionsGUI(im)
+    ex.show()
+    sys.exit(app.exec_())

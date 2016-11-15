@@ -1,52 +1,73 @@
-import tkFileDialog, tkMessageBox
-import os
 from PIL import Image, ImageTk
-from Tkinter import Label, Button, LEFT
+import os, sys
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 
 
-class OptionsGUI:
-    def __init__(self, master, im):
-        self.master = master
+class OptionsGUI(QWidget):
+    def __init__(self, im, parent=None):
+        super(OptionsGUI, self).__init__(parent)
+
         self.im = im
-        master.title("pJing")
-        master.iconbitmap(default=r'images\icon.ico')
-        pilImage = Image.open('out.png')
-        image = ImageTk.PhotoImage(pilImage)
+        layout = QVBoxLayout()
 
-        label = Label(image=image)
-        label.image = image  # keep a reference!
-        label.pack()
+        self.l1 = QLabel()
+        self.l1.setPixmap(QPixmap("out.png"))
+        layout.addWidget(self.l1)
+        self.setLayout(layout)
 
-        self.greet_button = Button(master, text="Upload", command=self.upload)
-        self.greet_button.pack(side=LEFT)
+        hbox = QHBoxLayout()
+        layout.addLayout(hbox)
 
-        self.greet_button = Button(master, text="Save", command=self.save)
-        self.greet_button.pack(side=LEFT)
+        self.b2 = QPushButton("&Upload")
+        self.b2.setDefault(True)
+        self.b2.clicked.connect(self.upload)
+        hbox.addWidget(self.b2)
 
-        self.close_button = Button(master, text="Quit", command=self.quit)
-        self.close_button.pack(side=LEFT)
+        self.b4 = QPushButton("&Save")
+        self.b4.setDefault(True)
+        self.b4.clicked.connect(self.save)
+        hbox.addWidget(self.b4)
 
-        self.center(self.master)
+        self.b1 = QPushButton("&Quit")
+        self.b1.setDefault(True)
+        self.b1.clicked.connect(self.quit)
+        hbox.addWidget(self.b1)
 
-    def center(self, win):
-        win.update_idletasks()
-        width = win.winfo_width()
-        height = win.winfo_height()
-        x = (win.winfo_screenwidth() // 2) - (width // 2)
-        y = (win.winfo_screenheight() // 2) - (height // 2)
-        win.geometry('{}x{}+{}+{}'.format(width, height, x, y))
+        self.setLayout(hbox)
+
+        self.setWindowTitle("pJing")
+        self.center()
+
+    def center(self):
+        frameGm = self.frameGeometry()
+        screen = QApplication.desktop().screenNumber(QApplication.desktop().cursor().pos())
+        centerPoint = QApplication.desktop().screenGeometry(screen).center()
+        frameGm.moveCenter(centerPoint)
+        self.move(frameGm.topLeft())
 
     def upload(self):
-        tkMessageBox.showerror("Error", "File uploads are not supported yet!")
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("Unsupported Action")
+        msg.setInformativeText("File uploads are not supported yet!")
+        msg.setWindowTitle("Information")
+        msg.setStandardButtons(QMessageBox.Ok)
+
+        retval = msg.exec_()
+        print "value of pressed message box button:", retval
 
     def save(self):
-        path = tkFileDialog.asksaveasfilename(defaultextension=".png")
-        if path is not '':
-            self.im.save(path)
+        path = QFileDialog.getSaveFileName(self, 'Dialog Title', selectedFilter='*.png')
+        if path:
+            self.im.save(str(path))
         if os.path.isfile('out.png'):
             os.remove('out.png')
 
     def quit(self):
         if os.path.isfile('out.png'):
             os.remove('out.png')
-        self.master.quit()
+        quit()
+
+
+
