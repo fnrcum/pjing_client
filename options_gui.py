@@ -5,9 +5,9 @@ from PyQt4.QtGui import *
 
 
 class OptionsGUI(QWidget):
-    def __init__(self, im, parent=None):
+    def __init__(self, im, qt_app, parent=None):
         super(OptionsGUI, self).__init__(parent)
-
+        self.app = qt_app
         self.im = im
         layout = QVBoxLayout()
 
@@ -67,7 +67,7 @@ class OptionsGUI(QWidget):
     def quit(self):
         if os.path.isfile('out.png'):
             os.remove('out.png')
-        quit()
+        self.app.instance().quit()
 
 
 

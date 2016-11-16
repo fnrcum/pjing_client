@@ -32,6 +32,6 @@ if __name__ == "__main__":
     # File options
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon('icon.ico'))
-    ex = OptionsGUI(im)
+    ex = OptionsGUI(im, app)
     ex.show()
     sys.exit(app.exec_())
