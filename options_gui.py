@@ -41,8 +41,8 @@ class OptionsGUI(QWidget):
 
     def center(self):
         frameGm = self.frameGeometry()
-        screen = QApplication.desktop().screenNumber(QApplication.desktop().cursor().pos())
-        centerPoint = QApplication.desktop().screenGeometry(screen).center()
+        screen = self.app.desktop().screenNumber(self.app.desktop().cursor().pos())
+        centerPoint = self.app.desktop().screenGeometry(screen).center()
         frameGm.moveCenter(centerPoint)
         self.move(frameGm.topLeft())
 
