@@ -1,0 +1,6 @@
+D:\screenshot\screenshot\screenshot\bin\Debug\screenshot.exe.config
+D:\screenshot\screenshot\screenshot\bin\Debug\screenshot.exe
+D:\screenshot\screenshot\screenshot\bin\Debug\screenshot.pdb
+D:\screenshot\screenshot\screenshot\obj\Debug\screenshot.csprojResolveAssemblyReference.cache
+D:\screenshot\screenshot\screenshot\obj\Debug\screenshot.exe
+D:\screenshot\screenshot\screenshot\obj\Debug\screenshot.pdb

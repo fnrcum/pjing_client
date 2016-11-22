@@ -14,7 +14,8 @@ def screenshot(file_name):
         os.system("screencapture {}".format(file_name))
     elif sys.platform == "win32":
         try:
-            os.system("call screenCapture {}".format(file_name))
+            # os.system("call screenCapture {}".format(file_name))
+            os.system("screenshot.exe")
         except:
             os.system("screenCapture.bat")
             os.system("call screenCapture {}".format(file_name))

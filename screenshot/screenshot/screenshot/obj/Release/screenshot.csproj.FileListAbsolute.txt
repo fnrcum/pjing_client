@@ -1,0 +1,5 @@
+D:\screenshot\screenshot\screenshot\bin\Release\screenshot.exe.config
+D:\screenshot\screenshot\screenshot\bin\Release\screenshot.exe
+D:\screenshot\screenshot\screenshot\bin\Release\screenshot.pdb
+D:\screenshot\screenshot\screenshot\obj\Release\screenshot.exe
+D:\screenshot\screenshot\screenshot\obj\Release\screenshot.pdb
