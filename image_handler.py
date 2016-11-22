@@ -6,7 +6,7 @@ class ImageHandler:
     def displayImage(self, screen, px, topleft, prior):
         # ensure that the rect always has positive width, height
         x, y = topleft
-        width =  pygame.mouse.get_pos()[0] - topleft[0]
+        width = pygame.mouse.get_pos()[0] - topleft[0]
         height = pygame.mouse.get_pos()[1] - topleft[1]
         if width < 0:
             x += width

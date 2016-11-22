@@ -1,6 +1,5 @@
 # encoding: cp1252
 import pygame, os, sys
-import pyautogui
 from image_handler import ImageHandler
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -10,9 +9,22 @@ from options_gui import OptionsGUI
 pygame.init()
 
 
+def screenshot(file_name):
+    if sys.platform == "darwin":
+        os.system("screencapture {}".format(file_name))
+    elif sys.platform == "win32":
+        try:
+            os.system("call screenCapture {}".format(file_name))
+        except:
+            os.system("screenCapture.bat")
+            os.system("call screenCapture {}".format(file_name))
+    else:
+        os.system("import -window root {}".format(file_name))
+
+
 if __name__ == "__main__":
     im_handle = ImageHandler()
-    pyautogui.screenshot('foo.png')
+    screenshot('foo.png')
     input_loc = 'foo.png'
     output_loc = 'out.png'
     screen, px = im_handle.setup(input_loc)
